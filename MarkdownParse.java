@@ -67,7 +67,7 @@ public class MarkdownParse {
     }
 
 
-   /**
+   /** original code allows you to check a file that you pass as an argument
    public static void main(String[] args) throws IOException {
         
         Path fileName = Path.of(args[0]);
