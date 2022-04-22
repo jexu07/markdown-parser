@@ -33,7 +33,14 @@ public class MarkdownParse {
             }
             int openParenTemp = markdown.indexOf("(", closeBracket);
             if(openParenTemp != -1){
-                openParen = openParenTemp;
+                if(openParenTemp == closeBracketTemp + 1){
+                    openParen = openParenTemp;
+                }
+                else{
+                    currentIndex = closeBracketTemp;
+                    continue;
+                }
+                //openParen = openParenTemp;
             }
             else{
                 break; 
