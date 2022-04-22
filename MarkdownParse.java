@@ -44,7 +44,6 @@ public class MarkdownParse {
                     currentIndex = closeBracketTemp;
                     continue;
                 }
-                //openParen = openParenTemp;
             }
             else{
                 break; 
@@ -56,7 +55,11 @@ public class MarkdownParse {
             else{
                 break;
             }
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            String toAdd = markdown.substring(openParen + 1, closeParen);
+            if(toAdd.indexOf(" ") == -1){
+                toReturn.add(toAdd);
+            }
+
             currentIndex = closeParen + 1;
         }
 
