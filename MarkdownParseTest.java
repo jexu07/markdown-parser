@@ -114,7 +114,7 @@ public class MarkdownParseTest {
     @Test
     public void testParseAltAlt3() throws IOException{
         List<String> expected = List.of("https://youtube.com");
-        Path fileName = Path.of("C:/Users/jerry/Documents/GitHub/markdown-parser/testing3.md");
+        Path fileName = Path.of("testing3.md");
         String content = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(expected, links);
