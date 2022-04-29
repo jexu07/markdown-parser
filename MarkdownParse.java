@@ -67,7 +67,7 @@ public class MarkdownParse {
     }
 
 
-   /** original code allows you to check a file that you pass as an argument
+   // original code allows you to check a file that you pass as an argument
    public static void main(String[] args) throws IOException {
         
         Path fileName = Path.of(args[0]);
@@ -77,8 +77,8 @@ public class MarkdownParse {
 	    System.out.println(links);
         System.out.println("ha!");
     }
-    */
-
+    
+/*
     public static void main(String[] args) throws IOException {
         {    Path fileName = Path.of("test-file.md");
             String content = Files.readString(fileName);
@@ -91,7 +91,8 @@ public class MarkdownParse {
             ArrayList<String> links = getLinks(content);
             System.out.println(links);
         }
-       
+    
     }
+    */
     
 }
