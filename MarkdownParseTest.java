@@ -120,6 +120,14 @@ public class MarkdownParseTest {
         assertEquals(expected, links);
     }
 
+    @Test
+    public void TestParseBreak1() throws IOException{
+        List<String> expected = List.of("https://en.wikipedia.org/wiki/Diego_(tortoise)");
+        Path fileName = Path.of("C:/Users/jerry/Documents/GitHub/markdown-parser/break-test.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(expected, links);
+    }
 
     @Test
     public void testFileExistence() throws IOException{
