@@ -110,4 +110,11 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(expected, links);
     }
+
+
+    @Test
+    public void testFileExistence() throws IOException{
+        Path fileName = Path.of("testing.md");
+        String content = Files.readString(fileName);
+    }
 }
