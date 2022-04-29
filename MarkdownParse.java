@@ -56,6 +56,12 @@ public class MarkdownParse {
                 break;
             }
             String toAdd = markdown.substring(openParen + 1, closeParen);
+            
+            if(toAdd.indexOf("(") != -1){
+                closeParen = markdown.indexOf(")",closeParen + 1);
+                toAdd = markdown.substring(openParen + 1, closeParen);
+            }
+
             if(toAdd.indexOf(" ") == -1){
                 toReturn.add(toAdd);
             }
