@@ -111,10 +111,25 @@ public class MarkdownParseTest {
         assertEquals(expected, links);
     }
 
+    @Test
+    public void testParseAltAlt3() throws IOException{
+        List<String> expected = List.of("https://youtube.com");
+        Path fileName = Path.of("C:/Users/jerry/Documents/GitHub/markdown-parser/testing3.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(expected, links);
+    }
+
 
     @Test
     public void testFileExistence() throws IOException{
         Path fileName = Path.of("testing.md");
+        String content = Files.readString(fileName);
+    }
+    
+    @Test
+    public void testFileExistence2() throws IOException{
+        Path fileName = Path.of("github.com/jexu07/markdown-parser/blob/main/test-file6.md");
         String content = Files.readString(fileName);
     }
 }
