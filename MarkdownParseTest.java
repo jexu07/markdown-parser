@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-
 import org.junit.*;
 public class MarkdownParseTest {
     @Test
