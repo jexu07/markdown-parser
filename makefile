@@ -1,4 +1,4 @@
-test: MarkdownParse.java MarkdownParseTest.java
+build: MarkdownParse.java MarkdownParseTest.java
 	javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar MarkdownParseTest.java
 
 MarkdownParse.class: MarkdownParse.java
@@ -18,5 +18,5 @@ target2:
 	touch target2
 
 
-run:
+test: build
 	java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore MarkdownParseTest
