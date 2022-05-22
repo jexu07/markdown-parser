@@ -37,6 +37,7 @@ public class MarkdownParse {
             while(closeParenMiddle != -1){
                 closeParen = markdown.indexOf(")",closeParen + 1);
                 if(closeParen == -1){
+                    closeParen = openParen;
                     break;
                 }                
                 toAdd = markdown.substring(openParen + 1, closeParen);
