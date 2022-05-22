@@ -11,55 +11,40 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
-        int openBracket = 0;
-        int closeBracket = 0;
-        int openParen = 0;
-        int closeParen = 0;
 
         while(currentIndex < markdown.length() && markdown.indexOf("[", currentIndex) != -1){
-            int openBracketTemp = markdown.indexOf("[", currentIndex);
-            if(openBracketTemp != -1){
-                if(openBracketTemp != 0 && markdown.indexOf("!", openBracketTemp - 1) == openBracketTemp - 1){
-                    currentIndex = openBracketTemp + 1;
-                    continue;
-                }
-                openBracket = openBracketTemp;
-            }
-            else{
+            int openBracket = markdown.indexOf("[", currentIndex);
+            int closeBracket = markdown.indexOf("]", openBracket);
+            int openParen = markdown.indexOf("(", closeBracket);
+            int closeParen = markdown.indexOf(")", openParen);
+            // Will stop the loop if no link is found
+            if (openBracket == -1 || openParen == -1 || closeBracket == -1 || closeParen == -1) {
                 break;
             }
-            int closeBracketTemp = markdown.indexOf("]", openBracket);
-            if(closeBracketTemp != -1){
-                closeBracket = openBracketTemp;
+            // Makes sure the close bracket and open parenthesis are next to each other
+            if(openParen - 1 != closeBracket){
+                currentIndex = openBracket + 1;
+                continue;
             }
-            else{
-                break;
+            // Doesn't get the link if it's an image
+            if(openBracket != 0 && markdown.indexOf("!", openBracket - 1) == openBracket - 1){
+                currentIndex = openBracket + 1;
+                continue;
             }
-            int openParenTemp = markdown.indexOf("(", closeBracket);
-            if(openParenTemp != -1){
-                if(openParenTemp == closeBracketTemp + 1){
-                    openParen = openParenTemp;
-                }
-                else{
-                    currentIndex = closeBracketTemp;
-                    continue;
-                }
-            }
-            else{
-                break; 
-            }
-            int closeParenTemp = markdown.indexOf(")", openParen);
-            if(closeParenTemp != -1){
-                closeParen = closeParenTemp;
-            }
-            else{
-                break;
-            }
+
             String toAdd = markdown.substring(openParen + 1, closeParen);
-            
-            if(toAdd.indexOf("(") != -1){
+            int closeParenMiddle = toAdd.indexOf("(");
+            while(closeParenMiddle != -1){
                 closeParen = markdown.indexOf(")",closeParen + 1);
+                if(closeParen == -1){
+                    break;
+                }                
                 toAdd = markdown.substring(openParen + 1, closeParen);
+                int closeParenMiddleTemp = toAdd.lastIndexOf("(");
+                if(closeParenMiddle == closeParenMiddleTemp){
+                    break;
+                }
+                closeParenMiddle = closeParenMiddleTemp;
             }
 
             if(toAdd.indexOf(" ") == -1){
@@ -91,7 +76,7 @@ public class MarkdownParse {
             ArrayList<String> links = getLinks(content);
             System.out.println(links);
         }
-        for(int i = 2; i < 9; i++){
+        for(int i = 2; i < 10; i++){
             Path fileName = Path.of("test-file" + i + ".md");
             String content = Files.readString(fileName);
             ArrayList<String> links = getLinks(content);
